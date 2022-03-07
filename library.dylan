@@ -14,6 +14,7 @@ define library testworks
   use io,
     import: { format, print, standard-io, streams };
   use coloring-stream;
+  use regular-expressions;
   use strings;
   use system,
     import: { date, file-system, locators, operating-system };
@@ -125,6 +126,7 @@ define module %testworks
   use operating-system,
     prefix: "os/";
   use print, import: { print-object };
+  use regular-expressions;
   use simple-random,
     import: { random };
   use standard-io;

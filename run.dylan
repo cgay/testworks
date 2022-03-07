@@ -76,6 +76,11 @@ define open class <test-runner> (<object>)
     init-keyword: progress:;
   constant slot runner-debug :: <debug-option> = $debug-none,
     init-keyword: debug:;
+  constant slot runner-match-regex :: false-or(<regex>) = #f,
+    init-keyword: match-regex:;
+  constant slot runner-skip-regex :: false-or(<regex>) = #f,
+    init-keyword: skip-regex:;
+  // DEPRECATED.  Use --match and --skip instead.
   constant slot runner-skip :: <sequence> = #[],   // of components
     init-keyword: skip:;
   constant slot runner-order :: <order> = $default-order,
@@ -117,11 +122,28 @@ define open generic execute-component?
     (component :: <component>, runner :: <test-runner>)
  => (execute? :: <boolean>);
 
+// Suites are always executed because otherwise we will not descend into them
+// to decide whether to run their tests.
+define method execute-component?
+    (component :: <suite>, runner :: <test-runner>)
+ => (execute? :: <boolean>)
+  #t
+end method;
+
 define method execute-component?
     (component :: <component>, runner :: <test-runner>)
  => (execute? :: <boolean>)
-  ~member?(component, runner.runner-skip) & tags-match?(runner.runner-tags, component)
-end;
+  ~member?(component, runner.runner-skip) // deprecated
+    & tags-match?(runner.runner-tags, component)
+    & begin
+        let name = component.component-name;
+        let match-regex = runner-match-regex(runner);
+        let skip-regex = runner-skip-regex(runner);
+        let matches? = ~match-regex | regex-search(match-regex, name);
+        let skip? = skip-regex & regex-search(skip-regex, name);
+        matches? & ~skip?
+      end
+end method;
 
 define method maybe-execute-component
     (component :: <component>, runner :: <test-runner>)

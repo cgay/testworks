@@ -13,6 +13,7 @@ define library testworks-test-suite
   use common-dylan;
   use io,
     import: { format, streams };
+  use regular-expressions;
   use strings;
   use system,
     import: { file-system, locators };
@@ -28,6 +29,7 @@ define module testworks-test-suite
     prefix: "fs/";
   use format;
   use locators;
+  use regular-expressions;
   use streams;
   use strings;
   use table-extensions,

@@ -72,28 +72,35 @@ define function parse-args
                   help: "Load the given shared library file before searching for"
                     " test suites. May be repeated."));
 
-  // TODO(cgay): Replace these 4 options with --skip and --match (or
-  // --include?).  Because Dylan is a Lisp-1 suites, tests, and
-  // benchmarks share a common namespace and --skip and --match will
-  // be unambiguous.
+  add-option(parser,
+             make(<parameter-option>,
+                  names: "match",
+                  variable: "REGEX",
+                  help: "Run only tests with names that match this regular expression."));
+  add-option(parser,
+             make(<parameter-option>,
+                  names: "skip",
+                  variable: "REGEX",
+                  help: "Skip tests with names that match this regular expression."));
+
   add-option(parser,
              make(<repeated-parameter-option>,
                   names: "suite",
-                  help: "Run (or list) only these named suites. May be repeated."));
+                  help: "DEPRECATED, use --match instead. Run (or list) only these named suites. May be repeated."));
   add-option(parser,
              make(<repeated-parameter-option>,
                   names: "test",
-                  help: "Run (or list) only these named tests. May be repeated."));
+                  help: "DEPRECATED, use --match instead. Run (or list) only these named tests. May be repeated."));
   add-option(parser,
              make(<repeated-parameter-option>,
                   names: "skip-suite",
                   variable: "SUITE",
-                  help: "Skip these named suites. May be repeated."));
+                  help: "DEPRECATED, use --skip instead. Skip these named suites. May be repeated."));
   add-option(parser,
              make(<repeated-parameter-option>,
                   names: "skip-test",
                   variable: "TEST",
-                  help: "Skip these named tests. May be repeated."));
+                  help: "DEPRECATED, use --skip instead. Skip these named tests. May be repeated."));
   add-option(parser,
              make(<choice-option>,
                   names: #("list", "l"),
@@ -154,8 +161,13 @@ define function make-runner-from-command-line
                  end;
   let report = get-option-value(parser, "report");
   let report-function = element($report-functions, report);
+  let match = get-option-value(parser, "match");
+  let skip = get-option-value(parser, "skip");
   let runner = make(<test-runner>,
                     debug: debug,
+                    match-regex: match & compile-regex(match),
+                    skip-regex: skip & compile-regex(skip),
+                    // DEPRECATED
                     skip: concatenate(map(find-component,
                                           get-option-value(parser, "skip-suite")),
                                       map(find-component,
@@ -226,6 +238,8 @@ define function run-test-application
   end;
 end function;
 
+// components is a list of components passed to run-test-application
+// by the user, which is deprecated.
 define function process-command-line
     (parser :: <command-line-parser>, components)
  => (suite :: <component>, runner :: <test-runner>, reporter :: <function>)
