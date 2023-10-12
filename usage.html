@@ -331,9 +331,9 @@ identified.</p>
 <p>If you do provide a description it may either be a single value to display, as
 with <code class="docutils literal notranslate"><span class="pre">format-to-string(&quot;%s&quot;,</span> <span class="pre">v)</span></code>, or a format string and corresponding format
 arguments. These are all valid:</p>
-<div class="highlight-dylan notranslate"><div class="highlight"><pre><span></span><span class="n">assert-equal</span><span class="p">(</span><span class="n">want</span><span class="p">,</span><span class="w"> </span><span class="n">got</span><span class="p">);</span><span class="w">       </span><span class="c1">// auto-generated description</span>
-<span class="n">assert-equal</span><span class="p">(</span><span class="n">want</span><span class="p">,</span><span class="w"> </span><span class="n">got</span><span class="p">,</span><span class="w"> </span><span class="n">foo</span><span class="p">);</span><span class="w">  </span><span class="c1">// a used as description</span>
-<span class="n">assert-equal</span><span class="p">(</span><span class="n">want</span><span class="p">,</span><span class="w"> </span><span class="n">got</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;does %= = %=?&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">);</span><span class="w">  </span><span class="c1">// formatted description</span>
+<div class="highlight-dylan notranslate"><div class="highlight"><pre><span></span><span class="n">assert-equal</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">);</span><span class="w">     </span><span class="c1">// auto-generated description</span>
+<span class="n">assert-equal</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">);</span><span class="w">  </span><span class="c1">// a used as description</span>
+<span class="n">assert-equal</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;does %= = %=?&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">);</span><span class="w">  </span><span class="c1">// formatted description</span>
 </pre></div>
 </div>
 </section>
@@ -655,17 +655,17 @@ into an executable with <code class="docutils literal notranslate"><span class="
 </section>
 <section id="reports">
 <h2><a class="toc-backref" href="#id10" role="doc-backlink">Reports</a><a class="headerlink" href="#reports" title="Permalink to this heading">#</a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">--report</span></code> and <code class="docutils literal notranslate"><span class="pre">--report-file</span></code> options can be used to write a full
-report of test run results so that those results can be compared with
-subsequent test runs, for example to find regressions. These are the available
-report types:</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">--report</span></code> option can be used to generate a full report of test run
+results. These are the available report types:</p>
 <dl class="simple">
-<dt>failures</dt><dd><p>Prints out only the list of failures and a summary.</p>
+<dt>failures (the default)</dt><dd><p>Prints out only the list of failures and a summary, in readable text format.</p>
+</dd>
+<dt>full</dt><dd><p>Like <code class="docutils literal notranslate"><span class="pre">failures</span></code> but prints results whether passing or failing.</p>
 </dd>
 <dt>json</dt><dd><p>Outputs JSON objects that match the suite/test/assertion tree structure,
 with full detail.</p>
 </dd>
-<dt>summary (the default)</dt><dd><p>Prints out only a summary of how many assertions, tests and suites
+<dt>summary</dt><dd><p>Prints out only a summary of how many assertions, tests and suites
 were executed, passed, failed or crashed.</p>
 </dd>
 <dt>surefire</dt><dd><p>Outputs XML in Surefire format.  This elides information about specific
