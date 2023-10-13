@@ -120,39 +120,22 @@ example, in
 .. code-block:: dylan
 
     assert-true(foo > bar)
-    expect(foo > bar)         // same as expect-true(foo > bar)
+    expect(foo > bar)
 
 the expression ``foo > bar`` is compared to ``#f``, and the result is recorded
 by the test harness.
 
-See the :doc:`reference` for detailed documentation on the available assertion
-macros:
+See the `reference docs <Assertions>`_ for detailed documentation on the
+available assertion macros.
 
-  * :macro:`assert-true`
-  * :macro:`assert-false`
-  * :macro:`assert-equal`
-  * :macro:`assert-not-equal`
-  * :macro:`assert-signals`
-  * :macro:`assert-no-errors`
-  * :macro:`assert-instance?`
-  * :macro:`assert-not-instance?`
-  * :macro:`expect`
-  * :macro:`expect-true`
-  * :macro:`expect-false`
-  * :macro:`expect-equal`
-  * :macro:`expect-not-equal`
-  * :macro:`expect-condition`
-  * :macro:`expect-no-condition`
-  * :macro:`expect-instance?`
-  * :macro:`expect-not-instance?`
+Each assertion macro accepts an optional description (a format string and
+optional format arguments), after the required arguments, which is displayed if
+the assertion fails.  If the description isn't provided, Testworks makes one
+from the expressions passed to the assertion macro. For example,
+``assert-true(2 > 3)`` produces this failure message::
 
-Each of these takes an optional description (a format string and optional
-format arguments), after the required arguments, which is displayed if the
-assertion fails.  If the description isn't provided, Testworks makes one from
-the expressions passed to the assertion macro. For example, ``assert-true(2 >
-3)`` produces this failure message::
-
-  (2 > 3) failed: expression "(2 > 3)" evaluates to #f
+  FAILED: (2 > 3)
+    expression "(2 > 3)" evaluates to #f
 
 In general, Testworks should be pretty good at reporting the actual values that
 caused the failure so it shouldn't be necessary to include them in the
@@ -167,7 +150,7 @@ arguments. These are all valid:
 .. code-block:: dylan
 
    assert-equal(want, got);       // auto-generated description
-   assert-equal(want, got, foo);  // a used as description
+   assert-equal(want, got, foo);  // foo used as description
    assert-equal(want, got, "does %= = %=?", a, b);  // formatted description
 
 Tests

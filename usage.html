@@ -310,40 +310,20 @@ one pass.</p>
 the expression passed, failed, or crashed (i.e., signaled an error).  As an
 example, in</p>
 <div class="highlight-dylan notranslate"><div class="highlight"><pre><span></span><span class="n">assert-true</span><span class="p">(</span><span class="n">foo</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">bar</span><span class="p">)</span>
-<span class="n">expect</span><span class="p">(</span><span class="n">foo</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">bar</span><span class="p">)</span><span class="w">         </span><span class="c1">// same as expect-true(foo &gt; bar)</span>
+<span class="n">expect</span><span class="p">(</span><span class="n">foo</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">bar</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>the expression <code class="docutils literal notranslate"><span class="pre">foo</span> <span class="pre">&gt;</span> <span class="pre">bar</span></code> is compared to <code class="docutils literal notranslate"><span class="pre">#f</span></code>, and the result is recorded
 by the test harness.</p>
-<p>See the <a class="reference internal" href="reference.html"><span class="doc">Testworks Reference</span></a> for detailed documentation on the available assertion
-macros:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p><a class="reference internal" href="reference.html#testworks:testworks:assert-true"><code class="xref dylan dylan-macro docutils literal notranslate"><span class="pre">assert-true</span></code></a></p></li>
-<li><p><a class="reference internal" href="reference.html#testworks:testworks:assert-false"><code class="xref dylan dylan-macro docutils literal notranslate"><span class="pre">assert-false</span></code></a></p></li>
-<li><p><a class="reference internal" href="reference.html#testworks:testworks:assert-equal"><code class="xref dylan dylan-macro docutils literal notranslate"><span class="pre">assert-equal</span></code></a></p></li>
-<li><p><a class="reference internal" href="reference.html#testworks:testworks:assert-not-equal"><code class="xref dylan dylan-macro docutils literal notranslate"><span class="pre">assert-not-equal</span></code></a></p></li>
-<li><p><a class="reference internal" href="reference.html#testworks:testworks:assert-signals"><code class="xref dylan dylan-macro docutils literal notranslate"><span class="pre">assert-signals</span></code></a></p></li>
-<li><p><a class="reference internal" href="reference.html#testworks:testworks:assert-no-errors"><code class="xref dylan dylan-macro docutils literal notranslate"><span class="pre">assert-no-errors</span></code></a></p></li>
-<li><p><a class="reference internal" href="reference.html#testworks:testworks:assert-instance?"><code class="xref dylan dylan-macro docutils literal notranslate"><span class="pre">assert-instance?</span></code></a></p></li>
-<li><p><a class="reference internal" href="reference.html#testworks:testworks:assert-not-instance?"><code class="xref dylan dylan-macro docutils literal notranslate"><span class="pre">assert-not-instance?</span></code></a></p></li>
-<li><p><code class="xref dylan dylan-macro docutils literal notranslate"><span class="pre">expect</span></code></p></li>
-<li><p><code class="xref dylan dylan-macro docutils literal notranslate"><span class="pre">expect-true</span></code></p></li>
-<li><p><code class="xref dylan dylan-macro docutils literal notranslate"><span class="pre">expect-false</span></code></p></li>
-<li><p><code class="xref dylan dylan-macro docutils literal notranslate"><span class="pre">expect-equal</span></code></p></li>
-<li><p><code class="xref dylan dylan-macro docutils literal notranslate"><span class="pre">expect-not-equal</span></code></p></li>
-<li><p><code class="xref dylan dylan-macro docutils literal notranslate"><span class="pre">expect-condition</span></code></p></li>
-<li><p><code class="xref dylan dylan-macro docutils literal notranslate"><span class="pre">expect-no-condition</span></code></p></li>
-<li><p><code class="xref dylan dylan-macro docutils literal notranslate"><span class="pre">expect-instance?</span></code></p></li>
-<li><p><code class="xref dylan dylan-macro docutils literal notranslate"><span class="pre">expect-not-instance?</span></code></p></li>
-</ul>
-</div></blockquote>
-<p>Each of these takes an optional description (a format string and optional
-format arguments), after the required arguments, which is displayed if the
-assertion fails.  If the description isn’t provided, Testworks makes one from
-the expressions passed to the assertion macro. For example, <code class="docutils literal notranslate"><span class="pre">assert-true(2</span> <span class="pre">&gt;</span>
-<span class="pre">3)</span></code> produces this failure message:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">2</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">)</span> <span class="n">failed</span><span class="p">:</span> <span class="n">expression</span> <span class="s2">&quot;(2 &gt; 3)&quot;</span> <span class="n">evaluates</span> <span class="n">to</span> <span class="c1">#f</span>
+<p>See the <a class="reference external" href="Assertions">reference docs</a> for detailed documentation on the
+available assertion macros.</p>
+<p>Each assertion macro accepts an optional description (a format string and
+optional format arguments), after the required arguments, which is displayed if
+the assertion fails.  If the description isn’t provided, Testworks makes one
+from the expressions passed to the assertion macro. For example,
+<code class="docutils literal notranslate"><span class="pre">assert-true(2</span> <span class="pre">&gt;</span> <span class="pre">3)</span></code> produces this failure message:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">FAILED</span><span class="p">:</span> <span class="p">(</span><span class="mi">2</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">)</span>
+  <span class="n">expression</span> <span class="s2">&quot;(2 &gt; 3)&quot;</span> <span class="n">evaluates</span> <span class="n">to</span> <span class="c1">#f</span>
 </pre></div>
 </div>
 <p>In general, Testworks should be pretty good at reporting the actual values that
@@ -355,7 +335,7 @@ identified.</p>
 with <code class="docutils literal notranslate"><span class="pre">format-to-string(&quot;%s&quot;,</span> <span class="pre">v)</span></code>, or a format string and corresponding format
 arguments. These are all valid:</p>
 <div class="highlight-dylan notranslate"><div class="highlight"><pre><span></span><span class="n">assert-equal</span><span class="p">(</span><span class="n">want</span><span class="p">,</span><span class="w"> </span><span class="n">got</span><span class="p">);</span><span class="w">       </span><span class="c1">// auto-generated description</span>
-<span class="n">assert-equal</span><span class="p">(</span><span class="n">want</span><span class="p">,</span><span class="w"> </span><span class="n">got</span><span class="p">,</span><span class="w"> </span><span class="n">foo</span><span class="p">);</span><span class="w">  </span><span class="c1">// a used as description</span>
+<span class="n">assert-equal</span><span class="p">(</span><span class="n">want</span><span class="p">,</span><span class="w"> </span><span class="n">got</span><span class="p">,</span><span class="w"> </span><span class="n">foo</span><span class="p">);</span><span class="w">  </span><span class="c1">// foo used as description</span>
 <span class="n">assert-equal</span><span class="p">(</span><span class="n">want</span><span class="p">,</span><span class="w"> </span><span class="n">got</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;does %= = %=?&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">);</span><span class="w">  </span><span class="c1">// formatted description</span>
 </pre></div>
 </div>
