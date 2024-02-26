@@ -644,12 +644,14 @@ report of test run results so that those results can be compared with
 subsequent test runs, for example to find regressions. These are the available
 report types:</p>
 <dl class="simple">
-<dt>failures</dt><dd><p>Prints out only the list of failures and a summary.</p>
+<dt>failures (the default)</dt><dd><p>Prints out only the list of failures and a summary, in readable text format.</p>
+</dd>
+<dt>full</dt><dd><p>Like <code class="docutils literal notranslate"><span class="pre">failures</span></code> but prints results whether passing or failing.</p>
 </dd>
 <dt>json</dt><dd><p>Outputs JSON objects that match the suite/test/assertion tree structure,
 with full detail.</p>
 </dd>
-<dt>summary (the default)</dt><dd><p>Prints out only a summary of how many assertions, tests and suites
+<dt>summary</dt><dd><p>Prints out only a summary of how many assertions, tests and suites
 were executed, passed, failed or crashed.</p>
 </dd>
 <dt>surefire</dt><dd><p>Outputs XML in Surefire format.  This elides information about specific
