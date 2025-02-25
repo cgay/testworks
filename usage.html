@@ -475,7 +475,8 @@ shorthand to indicate that failure is expected even when
 <p>Benchmarks are like tests except for:</p>
 <ul class="simple">
 <li><p>They do not require any assertions. (They pass unless they signal an error.)</p></li>
-<li><p>They are automatically assigned the “benchmark” tag.</p></li>
+<li><p>They are automatically assigned the “benchmark” tag so that they may be run by
+specifying <code class="docutils literal notranslate"><span class="pre">--tag</span> <span class="pre">benchmark</span></code> on the command line.</p></li>
 </ul>
 <p>The <a class="reference internal" href="reference.html#testworks:testworks:benchmark-definer"><code class="xref dylan dylan-macro docutils literal notranslate"><span class="pre">benchmark-definer</span></code></a> macro is like <a class="reference internal" href="reference.html#testworks:testworks:test-definer"><code class="xref dylan dylan-macro docutils literal notranslate"><span class="pre">test-definer</span></code></a>:</p>
 <div class="highlight-dylan notranslate"><div class="highlight"><pre><span></span><span class="k">define</span><span class="w"> </span><span class="n">benchmark</span><span class="w"> </span><span class="n">my-benchmark</span><span class="w"> </span><span class="p">()</span>
@@ -485,6 +486,15 @@ shorthand to indicate that failure is expected even when
 </div>
 <p>Benchmarks may be added to suites:</p>
 <div class="highlight-dylan notranslate"><div class="highlight"><pre><span></span><span class="k">define</span><span class="w"> </span><span class="n">suite</span><span class="w"> </span><span class="n">my-benchmarks-suite</span><span class="w"> </span><span class="p">()</span>
+<span class="w">  </span><span class="n">benchmark</span><span class="w"> </span><span class="n">my-benchmark</span><span class="p">;</span>
+<span class="k">end</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>If your benchmark requires setup or teardown that shouldn’t be part of the timing
+results, create a suite with setup and cleanup functions:</p>
+<div class="highlight-dylan notranslate"><div class="highlight"><pre><span></span><span class="k">define</span><span class="w"> </span><span class="n">suite</span><span class="w"> </span><span class="n">my-benchmarks-suite</span>
+<span class="w">    </span><span class="p">(</span><span class="k">setup-function:</span><span class="w"> </span><span class="n">my-setup</span><span class="p">,</span>
+<span class="w">     </span><span class="k">cleanup-function:</span><span class="w"> </span><span class="n">my-cleanup</span><span class="p">)</span>
 <span class="w">  </span><span class="n">benchmark</span><span class="w"> </span><span class="n">my-benchmark</span><span class="p">;</span>
 <span class="k">end</span><span class="p">;</span>
 </pre></div>
