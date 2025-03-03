@@ -543,6 +543,13 @@ suite:</p>
 <span class="k">end</span><span class="p">;</span>
 </pre></div>
 </div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If a suite <strong>setup</strong> function signals a <a class="reference external" href="https://opendylan.org/books/drm/Condition_Classes#serious-condition"><code class="xref drm docutils literal notranslate"><span class="pre">&lt;serious-condition&gt;</span></code></a> the suite
+components will not be executed and will be marked as skipped in the
+results. If either the suite <strong>setup</strong> or <strong>cleanup</strong> function signals a
+<a class="reference external" href="https://opendylan.org/books/drm/Condition_Classes#serious-condition"><code class="xref drm docutils literal notranslate"><span class="pre">&lt;serious-condition&gt;</span></code></a> the suite itself will be marked as crashed.</p>
+</div>
 </section>
 <section id="interface-specification-suites">
 <h3>Interface Specification Suites<a class="headerlink" href="#interface-specification-suites" title="Link to this heading">¶</a></h3>

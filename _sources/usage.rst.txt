@@ -349,6 +349,11 @@ suite:
       suite http-client-test-suite;
     end;
 
+.. note:: If a suite **setup** function signals a :drm:`<serious-condition>` the suite
+          components will not be executed and will be marked as skipped in the
+          results. If either the suite **setup** or **cleanup** function signals a
+          :drm:`<serious-condition>` the suite itself will be marked as crashed.
+
 Interface Specification Suites
 ------------------------------
 
