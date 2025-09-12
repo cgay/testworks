@@ -908,7 +908,7 @@ Create and :func:`register <register-component>` your test components and then c
 
    See :class:`<runnable>` for a list of init keywords.
 
-.. class :: <suite>
+.. class:: <suite>
    :sealed:
    :instantiable:
 
