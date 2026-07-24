@@ -115,7 +115,20 @@ end function parse-args;
 
 define function do-loads
     (library-files :: <collection>)
+  let extension = select (os/$os-name)
+                    #"win32" => ".dll";
+                    #"darwin" => ".dylib";
+                    otherwise => ".so";
+                  end;
   for (file in library-files)
+    // Avoid importing strings just for ends-with?.
+    if (file.size <= extension.size
+          | extension ~= copy-sequence(file, start: file.size - extension.size))
+      // Assume that if the user didn't specify the extension they also omitted the "lib"
+      // prefix.  (It's possible for a valid library name to start with "lib" so the
+      // check can't be done independently of the extension check.)
+      file := concatenate(if (os/$os-name == #"win32") "" else "lib" end, file, extension);
+    end;
     format(*standard-output*, "Loading library %s\n", file);
     force-output(*standard-output*);
     os/load-library(file);
